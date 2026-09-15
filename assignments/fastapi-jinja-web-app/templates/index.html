@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Book Shelf</title>
+  </head>
+  <body>
+    <main>
+      <h1>Book Shelf</h1>
+
+      {% if error %}
+      <p role="alert">{{ error }}</p>
+      {% endif %}
+
+      <section aria-labelledby="new-book-heading">
+        <h2 id="new-book-heading">Cadastrar livro</h2>
+        <form action="/books" method="post">
+          <label for="title">Título</label>
+          <input id="title" name="title" type="text" required>
+
+          <label for="author">Autor</label>
+          <input id="author" name="author" type="text" required>
+
+          <label for="year">Ano de publicação</label>
+          <input id="year" name="year" type="number" min="1" required>
+
+          <button type="submit">Adicionar livro</button>
+        </form>
+      </section>
+
+      <section aria-labelledby="books-heading">
+        <h2 id="books-heading">Livros</h2>
+        {% if books %}
+        <ul>
+          {% for book in books %}
+          <li>{{ book.title }} por {{ book.author }} ({{ book.year }})</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>Nenhum livro cadastrado.</p>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>
